@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Mis postulaciones";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mis Postulaciones</title>
+    <style>
+        /* Estilos para la página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .job-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .application-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            .application-list li {
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                padding: 10px;
+            }
+
+                .application-list li h3 {
+                    margin: 0;
+                }
+
+                .application-list li p {
+                    margin: 0;
+                }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <div class="header">
+        <h1>Mis Postulaciones</h1>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <!-- Título del trabajo -->
+        <h2 class="job-title">Título del trabajo</h2>
+
+        <!-- Lista de postulaciones -->
+        <ul class="application-list">
+            <li>
+                <h3>Postulacion 1</h3>
+                <p>Fecha de postulación: 01/01/2023</p>
+                <p>Correo electrónico: postulante1@example.com</p>
+                <p>Teléfono: 1234567890</p>
+                <p>Curriculum Vitae adjunto: <a href="ruta/al/cv_postulante1.pdf" target="_blank">Descargar</a></p>
+            </li>
+            <li>
+                <h3>Postulacion 2</h3>
+                <p>Fecha de postulación: 02/01/2023</p>
+                <p>Correo electrónico: postulante2@example.com</p>
+                <p>Teléfono: 9876543210</p>
+                <p>Curriculum Vitae adjunto: <a href="ruta/al/cv_postulante2.pdf" target="_blank">Descargar</a></p>
+            </li>
+            <!-- Agregar más postulaciones según sea necesario -->
+        </ul>
+    </div>
+</body>
+</html>

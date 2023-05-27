@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MyJob.Models.Empresa>
+
+<h1>Ofertas Laborales</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Ubicación</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var empresa in Model)
+        {
+            <tr>
+                <td>@empresa.Nombre</td>
+                <td>@empresa.Correo</td>
+                <td>@empresa.Telefono</td>
+                <td>@empresa.Ubicacion</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
