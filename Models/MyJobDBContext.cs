@@ -15,6 +15,11 @@ namespace MyJob.Models
         public DbSet<Empleo> Empleos { get; set; }
         public DbSet<Postulaciones> Postulaciones { get; set; }
 
+        internal static void Initialize(MyJobDBContext dbContext)
+        {
+            throw new NotImplementedException();
+        }
+
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    modelBuilder.Entity<Postulacion>()

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<MyJob.Models.Empresa>
 
-<h1>Ofertas Laborales</h1>
+
+@*<h1>Ofertas Laborales</h1>
 
 <table class="table">
     <thead>
@@ -12,17 +13,151 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var empresa in Model)
+        @foreach (var Empresa in Model)
         {
             <tr>
-                <td>@empresa.Nombre</td>
-                <td>@empresa.Correo</td>
-                <td>@empresa.Telefono</td>
-                <td>@empresa.Ubicacion</td>
+                <td>@Empresa.Nombre</td>
+                <td>@Empresa.Correo</td>
+                <td>@Empresa.Telefono</td>
+                <td>@Empresa.Ubicacion</td>
             </tr>
         }
     </tbody>
-</table>
+</table>*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Búsqueda de Empleo</title>
+    <!-- Agrega los estilos CSS y los scripts JS necesarios -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <h1>Búsqueda de Empleo</h1>
+
+    <!-- Filtros -->
+    <div class="container">
+        <h2>Filtros</h2>
+        <form id="filter-form">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="job-title">Puesto:</label>
+                    <input type="text" id="job-title" name="job-title">
+                </div>
+                <div class="col-md-3">
+                    <label for="location">Lugar:</label>
+                    <input type="text" id="location" name="location">
+                </div>
+                <div class="col-md-3">
+                    <label for="salary">Sueldo:</label>
+                    <input type="number" id="salary" name="salary">
+                </div>
+                <div class="col-md-3">
+                    <label for="experience">Experiencia:</label>
+                    <input type="text" id="experience" name="experience">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <label for="years-of-experience">Años de experiencia:</label>
+                    <input type="number" id="years-of-experience" name="years-of-experience">
+                </div>
+                <div class="col-md-3">
+                    <label for="contract-type">Tipo de contrato:</label>
+                    <select id="contract-type" name="contract-type">
+                        <option value="">Seleccionar</option>
+                        <option value="Tiempo completo">Tiempo completo</option>
+                        <option value="Medio tiempo">Medio tiempo</option>
+                        <option value="Por proyecto">Por proyecto</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="sector">Sector:</label>
+                    <input type="text" id="sector" name="sector">
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Carrusel de ofertas laborales -->
+    <div id="carousel-example" class="carousel slide mt-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Aquí se generan dinámicamente las diapositivas con las ofertas laborales -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-example" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel-example" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Manejo del envío del formulario de filtros
+            $('#filter-form').submit(function (event) {
+                event.preventDefault();
+
+                // Obtener los valores de los filtros
+                var jobTitle = $('#job-title').val();
+                var location = $('#location').val();
+                var salary = $('#salary').val();
+                var experience = $('#experience').val();
+                var yearsOfExperience = $('#years-of-experience').val();
+                var contractType = $('#contract-type').val();
+                var sector = $('#sector').val();
+
+                // Realizar una solicitud a la API para obtener las ofertas laborales filtradas
+                $.ajax({
+                    url: '/api/ofertasLaborales',
+                    type: 'GET',
+                    data: {
+                        jobTitle: jobTitle,
+                        location: location,
+                        salary: salary,
+                        experience: experience,
+                        yearsOfExperience: yearsOfExperience,
+                        contractType: contractType,
+                        sector: sector
+                    },
+                    success: function (response) {
+                        // Limpiar el carrusel existente
+                        $('.carousel-inner').empty();
+
+                        // Generar las diapositivas con las nuevas ofertas laborales
+                        $.each(response, function (index, ofertaLaboral) {
+                            var active = index === 0 ? 'active' : '';
+                            var slide = '<div class="carousel-item ' + active + '">' +
+                                '<h3>' + ofertaLaboral.titulo + '</h3>' +
+                                '<p>' + ofertaLaboral.descripcion + '</p>' +
+                                '<p>' + ofertaLaboral.ubicacion + '</p>' +
+                                '<p>' + ofertaLaboral.fecha_publicacion + '</p>' +
+                                '</div>';
+                            $('.carousel-inner').append(slide);
+                        });
+
+                        // Actualizar el carrusel
+                        $('#carousel-example').carousel();
+                    },
+                    error: function () {
+                        // Manejar el error de la solicitud
+                        alert('Error al obtener las ofertas laborales');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
 
 
 

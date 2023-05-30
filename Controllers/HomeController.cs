@@ -16,6 +16,11 @@ namespace MyJob.Controllers
         {
             _logger = logger;
             _context = context;
+
+         
+              
+            
+
         }
 
 
@@ -25,6 +30,7 @@ namespace MyJob.Controllers
             var empresas = _context.Empresas.ToListAsync();
 
             return View(empresas);
+
             
 
 
